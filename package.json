@@ -5,7 +5,7 @@
   "main": "pv-protocol.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "publish:lib": "git add . && git commit -m \"new version published\" --allow-empty && npm version patch && npm publish --publish && git push"
+    "publish:lib": "git add . && git commit -m \"new version published\" --allow-empty && npm version patch && npm publish --access public && git push"
   },
   "keywords": [
     "node-red"
