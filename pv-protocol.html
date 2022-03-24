@@ -1,0 +1,33 @@
+<script type="text/javascript">
+    RED.nodes.registerType('pv-protocol',{
+        category: 'Pfeiffer Vacuum',
+        color: '#cc0033',
+        defaults: {
+            name: {value:""}
+        },
+        inputs:1,
+        outputs:1,
+        icon: "PVViewerLogoCircle_white.svg",
+        paletteLabel: function (){
+            return "PV Protocol - Parse Input"
+        },
+        label: function() {
+            return this.name||"PV Protocol - Parse Input";
+        }
+    });
+</script>
+
+<script type="text/html" data-template-name="pv-protocol">
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+    <div class="form-row">
+        <label for="node-input-product"><i class="fa fa-tag"></i> Product</label>
+        <input type="text" id="node-input-product" placeholder="auto">
+    </div>
+</script>
+
+<script type="text/html" data-help-name="pv-protocol">
+    <p>A simple node that converts the message payloads into PV Protocol Parameters</p>
+</script>

@@ -1,0 +1,20 @@
+{
+  "name": "node-red-contrib-pv-protocol-parser",
+  "version": "1.0.0",
+  "description": "Wrapper for the pv-protocol-parser lib",
+  "main": "pv-protocol.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "publish:lib": "git add . && git commit -m \"new version published\" --allow-empty && npm version patch && npm publish && git push"
+  },
+  "node-red": {
+    "nodes": {
+      "pv-protocol": "pv-protocol.js"
+    }
+  },
+  "dependencies": {
+    "pv-protocol-parser": "^1.0.4"
+  },
+  "author": "",
+  "license": "ISC"
+}
