@@ -1,6 +1,6 @@
 {
   "name": "@tonimoeckel/node-red-pv-protocol-parser",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Wrapper for the pv-protocol-parser lib",
   "main": "pv-protocol.js",
   "scripts": {
