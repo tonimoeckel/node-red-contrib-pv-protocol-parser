@@ -4,14 +4,22 @@ module.exports = function(RED) {
         RED.nodes.createNode(this,config);
         var node = this;
         node.on('input', function(msg) {
+            var request = msg["request_payload"] || msg["request"];
+            if (!request){
+                console.warn("No request found");
+                return;
+            }
             var response =  PVProtocolParser.parseResponse(msg.payload, {
-                request: msg["request_payload"] || msg["request"]
+                request
             });
             if (response){
+                console.log("Response",msg.payload.length,request.length )
                 msg.payload = response
+                node.send(msg);
+            }else {
+                console.log("No response",msg.payload.length,request.length )
             }
 
-            node.send(msg);
         });
     }
     RED.nodes.registerType("pv-protocol",PVProtocolNode);

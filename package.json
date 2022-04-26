@@ -12,11 +12,12 @@
   ],
   "node-red": {
     "nodes": {
-      "pv-protocol": "pv-protocol.js"
+      "pv-protocol": "pv-protocol.js",
+      "pv-request": "pv-request.js"
     }
   },
   "dependencies": {
-    "pv-protocol-parser": "^1.0.4"
+    "pv-protocol-parser": "^1.0.9"
   },
   "author": "",
   "license": "ISC"

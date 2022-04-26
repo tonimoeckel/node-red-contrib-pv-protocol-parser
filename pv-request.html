@@ -1,0 +1,134 @@
+<script type="text/javascript">
+
+    RED.nodes.registerType('pv-request',{
+        category: 'Pfeiffer Vacuum',
+        color: '#cc0033',
+        defaults: {
+            slave: {value:"1"},
+            slaveType: {value:"str"},
+            pid: {value:""},
+            pidType: {value:"pid"},
+            mode: {value:"r"},
+            datatype: {value: ""},
+            write: {value: ""},
+            writeType: {value: 'str'},
+        },
+        inputs:1,
+        outputs:1,
+        icon: "PVViewerLogoCircle_white.svg",
+        paletteLabel: function (){
+            return "PV - Request"
+        },
+        label: function() {
+            return this.name||"PV - Request";
+        },
+        oneditprepare: function() {
+
+            $("#node-input-slave").typedInput({
+                typeField: $("#node-input-slaveType"),
+                types:['str','num','bool','msg']
+            })
+
+            $("#node-input-write").typedInput({
+                typeField: $("#node-input-writeType"),
+                types:['str','num','bool','msg','flow','global']
+            })
+
+            $("#node-input-mode").typedInput({
+                types: [{
+                    value: "r/w",
+                    options: [{
+                        value: "r",
+                        label: "Read"
+                    },{
+                        value: "w",
+                        label: "Write"
+                    }]
+                }]
+            })
+
+            $("#node-input-datatype").typedInput({
+                value: "str",
+                types: ["str",{
+                    value: "datatype",
+                    label: "Data type",
+                    icon: "fa fa-code",
+                    options: [
+                        "int",
+                        "float",
+                        "string",
+                        "string8",
+                        "string16",
+                        "boolean",
+                        "boolean_old",
+                        "u_short_int",
+                        "u_integer",
+                        "u_real",
+                        "u_expo_new",
+                        "u_expo",
+                        "boolean_new"].map((i) => ({
+                        value: i,
+                        label: i
+                    }))
+                }]
+            })
+
+            $.ajax({
+                url: "/pv/parameters",
+                method: 'GET',
+                dataType: "json",
+                contentType: "application/json",
+                success: function(data) {
+
+                    $("#node-input-pid").typedInput({
+                        typeField: $("#node-input-pidType"),
+                        types: [{
+                            icon: 'fa fa-list',
+                            label: 'Parameter',
+                            value: "pid",
+                            options: data.map((p) => ({
+                                value: p.id,
+                                label: `[${p.id}] ${p.name}`
+                            }))
+                        },"str","msg"]
+                    })
+                }
+            });
+
+        }
+    });
+</script>
+
+<script type="text/html" data-template-name="pv-request">
+    <div class="form-row">
+        <label for="node-input-slave"><i class="fa fa-tag"></i> Slave</label>
+        <input type="text" id="node-input-slave" placeholder="1">
+        <input type="hidden" id="node-input-slaveType">
+    </div>
+    <div class="form-row">
+        <label for="node-input-pid"><i class="fa fa-list"></i> Param.</label>
+        <input type="text" id="node-input-pid" placeholder="auto">
+        <input type="hidden" id="node-input-pidType">
+    </div>
+
+    <div class="form-row">
+        <label for="node-input-mode"><i class="fa fa-pencil"></i> Mode</label>
+        <input type="text" id="node-input-mode" placeholder="r">
+    </div>
+
+    <div class="form-row">
+        <label for="node-input-datatype"><i class="fa fa-code"></i> Data Type</label>
+        <input type="text" id="node-input-datatype" placeholder="auto">
+    </div>
+
+    <div class="form-row">
+        <label for="node-input-write"><i class="fa fa-code"></i> Data</label>
+        <input type="text" id="node-input-write" placeholder="">
+        <input type="hidden" id="node-input-writeType">
+    </div>
+
+</script>
+
+<script type="text/html" data-help-name="pv-request">
+    <p>A simple node that generates a PV Protocol Request</p>
+</script>

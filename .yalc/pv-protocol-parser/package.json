@@ -1,0 +1,21 @@
+{
+  "name": "pv-protocol-parser",
+  "version": "1.0.8",
+  "description": "",
+  "main": "dist/index.js",
+  "module": "dist/index.es.js",
+  "scripts": {
+    "pv-protocol-parser:build": "rollup -c -w",
+    "build": "rollup -c",
+    "build:watch": "rollup -c -w",
+    "test": "jest",
+    "git:push": "git add . && git commit -m \"auto commit\" --allow-empty && git push",
+    "yalc:publish": "yalc publish --update",
+    "build:publish:lib": "npm run build && git add . && git commit -m \"new version published\" --allow-empty && npm version patch && npm publish --access public && git push"
+  },
+  "author": "",
+  "license": "ISC",
+  "peerDependencies": {},
+  "dependencies": {},
+  "yalcSig": "6ae51402dc9a9924d2d2ac74a7d0cf4e"
+}
